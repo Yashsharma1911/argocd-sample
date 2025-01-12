@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: applicationSetExample
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/Yashsharma1911/argocd-sample.git
+        revision: main
+        directories:
+          - path: ./applicationSet/environments/*
+  template:
+    metadata:
+      name: '{{path.basename}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/Yashsharma1911/argocd-sample.git
+        targetRevision: main
+        path: '{{path}}'
+      destination:
+        cluster: http://kuberentes.default.svc
+        namespace: '{{path.basename}}'
+      automated:
+        syncPolicy:
+          prune: true
+          selfHeal: true
+      
