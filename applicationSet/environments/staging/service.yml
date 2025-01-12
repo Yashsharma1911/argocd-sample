@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: staging
+  name: staging-service
 spec:
   selector:
     app: staging
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 80
+      port: 8080
+      targetPort: 8080
   type: ClusterIP
