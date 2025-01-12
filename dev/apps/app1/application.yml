@@ -1,18 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: app-of-apps
+  name: app1
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/Yashsharma1911/argocd-sample.git
     targetRevision: HEAD
-    path: .
+    path: ./manifests
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: myapp1
   syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
     automated:
       prune: true
       selfHeal: true
