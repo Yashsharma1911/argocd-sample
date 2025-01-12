@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/Yashsharma1911/argocd-sample.git
     targetRevision: HEAD
-    path: ./app2
+    path: ./dev/app2
   destination:
     server: https://kubernetes.default.svc
     namespace: myapp2
