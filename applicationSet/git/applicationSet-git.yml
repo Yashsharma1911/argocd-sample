@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: applicationSetExample
+  name: application-set-example
   namespace: argocd
 spec:
   generators:
@@ -9,7 +9,7 @@ spec:
         repoURL: https://github.com/Yashsharma1911/argocd-sample.git
         revision: main
         directories:
-          - path: ./applicationSet/environments/*
+          - path: applicationSet/environments/*
   template:
     metadata:
       name: '{{path.basename}}'
@@ -20,10 +20,9 @@ spec:
         targetRevision: main
         path: '{{path}}'
       destination:
-        cluster: http://kuberentes.default.svc
+        server: https://kubernetes.default.svc
         namespace: '{{path.basename}}'
-      automated:
-        syncPolicy:
+      syncPolicy:
+        automated:
           prune: true
           selfHeal: true
-      
